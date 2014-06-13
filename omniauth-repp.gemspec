@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = OmniAuth::Repp::VERSION
   s.authors     = ["Alex Sears"]
   s.email       = ["alexwsears@gmail.com"]
-  s.homepage    = "https://github.com/arunagw/omniauth-twitter"
+  s.homepage    = "https://github.com:Kandidly/omniauth-repp"
   s.summary     = %q{OmniAuth strategy for Repp}
   s.description = %q{OmniAuth strategy for Repp}
   s.license     = "MIT"
