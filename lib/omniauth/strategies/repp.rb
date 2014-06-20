@@ -14,16 +14,15 @@ module OmniAuth
 
       info do
         {
+          :name => raw_info['displayName'],
+          :email => raw_info['email'],
           :nickname => raw_info['username'],
-          :preferredName => raw_info['preferredName']['full'],
-          :badgeUrls => {
-            :reppIdentityCard => raw_info['reppIdentityCard'],
-            :reppIdentityLarge => raw_info['reppIdentityLarge'],
-            :reppIdentityMedium => raw_info['reppIdentityMedium'],
-            :reppIdentitySmall => raw_info['reppIdentitySmall'],
-            :reppLogo => raw_info['reppLogo']
+          :first_name => raw_info['preferredName']['first'],
+          :last_name => raw_info['preferredName']['last'],
+          :image => raw_info['photoUrl'],
+          :urls => {
+            'Profile' => raw_info['profileUrl']
           },
-          :profileUrl => raw_info['profileUrl']
         }
       end
 
