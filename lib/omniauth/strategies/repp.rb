@@ -15,19 +15,19 @@ module OmniAuth
         :token_url => '/oauth/token'
       }
 
-      uid { access_token.params[:user_id] }
+      uid { raw_info['id'] }
 
       info do
         {
           :name => raw_info['displayName'],
           :email => raw_info['email'],
           :nickname => raw_info['username'],
-          :first_name => raw_info['preferredName']['first'],
-          :last_name => raw_info['preferredName']['last'],
+          :first_name => raw_info['name']['first'],
+          :last_name => raw_info['name']['last'],
           :image => raw_info['photoUrl'],
           :urls => {
             'Profile' => raw_info['profileUrl']
-          },
+          }
         }
       end
 
@@ -36,7 +36,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/people/me').parsed || {}
+        @raw_info ||= access_token.get('/people/me', { :headers => { 'Accept' => 'application/json' }, :parse => :json } ).parsed || {}
       end
 
       def callback_phase
@@ -62,8 +62,11 @@ module OmniAuth
     private
 
       def authorization_header
+        # Base64 encode
         header = Base64.encode64("#{options.client_id}:#{options.client_secret}")
-        "Basic #{header}"
+        # Remove newlines and add Basic to the beginning
+        header.gsub!(/\n/, '').gsub!(/^(.+)$/, 'Basic \1')
+        header
       end
 
     end
