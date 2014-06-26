@@ -17,6 +17,5 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency 'multi_json', '~> 1.3'
   s.add_runtime_dependency 'omniauth-oauth2', '~> 1.0'
 end
